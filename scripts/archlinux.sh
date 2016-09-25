@@ -1,9 +1,11 @@
-#!/bin/sh
+#! /bin/bash
 
 TARGET=$1
 
-curl -O http://idylls.jp/noah-blob/arch.tar.lzma
-tar xvf arch.tar.lzma -C $TARGET --strip-components=1
+ARCHIVE=$(mktemp)
+
+curl -o $ARCHIVE http://idylls.jp/noah-blob/arch.tar.lzma
+tar xvf $ARCHIVE -C $TARGET --strip-components=1
 
 #
 # Modify Arch Linux Userspace to do away with VFS
@@ -27,4 +29,4 @@ rm $TARGET/etc/hostname
 
 echo archlinux is successfully installed into $TARGET
 
-rm arch.tar.lzma
+rm $ARCHIVE
