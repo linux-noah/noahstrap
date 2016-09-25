@@ -1,0 +1,27 @@
+=head1 NAME
+
+noahstrap -- boostrap a linux system for noah
+
+=head1 SYNOPSIS
+
+  noahstrap [OPTION...] SUITE TARGET
+
+  noahstrap [OPTION...] --list
+
+=head1 DESCRIPTION
+
+noahstrap bootstraps a linux system of SUITE for noah into TARGET directory from the repository.
+
+=head1 OPTIONS
+
+=head2 --list
+
+Synchronizes the suite database and lists all available suites.
+
+=head2 --help
+
+Shows this message.
+
+=head1 AUTHOR
+
+Yuichi Nishiwaki
