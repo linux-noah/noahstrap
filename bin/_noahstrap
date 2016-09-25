@@ -9,6 +9,8 @@ use FindBin;
 
 our $VERSION = '0.0.1';
 
+my $prefix = "NOAHSTRAP_INSTALL_PREFIX";
+
 my $opt_list;
 
 GetOptions(
@@ -40,7 +42,7 @@ if ($< != 0) {
     exit 1;
 }
 
-system "${FindBin::Bin}/../libexec/noahstrap-archlinux.sh $target";
+system "${prefix}/libexec/noahstrap-archlinux.sh $target";
 
 __END__
 
