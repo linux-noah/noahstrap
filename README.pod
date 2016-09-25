@@ -5,7 +5,6 @@ noahstrap -- boostrap a linux system for noah
 =head1 SYNOPSIS
 
   noahstrap [OPTION...] SUITE TARGET
-
   noahstrap [OPTION...] --list
 
 =head1 DESCRIPTION
@@ -21,6 +20,10 @@ Synchronizes the suite database and lists all available suites.
 =head2 --help
 
 Shows this message.
+
+=head2 --version
+
+Shows version information.
 
 =head1 AUTHOR
 
