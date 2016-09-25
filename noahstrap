@@ -1,0 +1,72 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+use Getopt::Long;
+use Pod::Usage;
+use File::Path;
+
+our $VERSION = '0.0.1';
+
+my $opt_list;
+
+GetOptions(
+    list => \$opt_list,
+    help => sub {
+        pod2usage(1);
+    },
+    version => sub {
+        print "$VERSION\n";
+        exit 0;
+    }
+) or exit 1;
+
+if ($opt_list) {
+    print "archlinux\n";
+    exit 0;
+}
+
+if ($#ARGV + 1 != 2) {
+    pod2usage(1);
+}
+
+my ($suite, $target) = @ARGV;
+
+die "unknown suite: $suite" if $suite ne "archlinux";
+
+if ($< != 0) {
+    print "must run as root\n";
+    exit 1;
+}
+
+system "./scripts/archlinux.sh $target";
+
+__END__
+
+=head1 NAME
+
+noahstrap -- boostrap a linux system for noah
+
+=head1 SYNOPSIS
+
+  noahstrap [OPTION...] SUITE TARGET
+
+  noahstrap [OPTION...] --list
+
+=head1 DESCRIPTION
+
+noahstrap bootstraps a linux system of SUITE for noah into TARGET directory from the repository.
+
+=head1 OPTIONS
+
+=head2 --list
+
+Synchronizes the suite database and lists all available suites.
+
+=head2 --help
+
+Shows this message.
+
+=head1 AUTHOR
+
+Yuichi Nishiwaki
