@@ -5,7 +5,7 @@ VERSION=$1
 # commit & push
 
 FILE=`pwd`/`git rev-parse --show-cdup`/bin/_noahstrap
-sed -i "" "s/our $$VERSION = .*/our $$VERSION = \"$VERSION\";/" $FILE
+sed -i "" "s/our \$VERSION.*/our \$VERSION = \"$VERSION\";/" $FILE
 
 git add $FILE
 
@@ -47,9 +47,9 @@ else
     cd homebrew-noah
 fi
 
-sed -i "" -e "8 s@.*@  url \"$URL\"@g" noah.rb
-sed -i "" -e "9 s@.*@  version \"$VERSION\"@g" noah.rb
-sed -i "" -e "10 s@.*@  sha256 \"$SHA256\"@g" noah.rb
+sed -i "" -e "8 s@.*@  url \"$URL\"@g" noahstrap.rb
+sed -i "" -e "9 s@.*@  version \"$VERSION\"@g" noahstrap.rb
+sed -i "" -e "10 s@.*@  sha256 \"$SHA256\"@g" noahstrap.rb
 
 git add noahstrap.rb
 git commit -m "noahstrap $VERSION"
