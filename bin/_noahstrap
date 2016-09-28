@@ -11,9 +11,10 @@ our $VERSION = '0.0.2';
 
 my $prefix = "NOAHSTRAP_INSTALL_PREFIX";
 
-my $opt_list;
+my ($opt_list, $opt_mkdir);
 
 GetOptions(
+    p => \$opt_mkdir,
     list => \$opt_list,
     help => sub {
         pod2usage(1);
@@ -36,6 +37,12 @@ if ($#ARGV + 1 != 2) {
 my ($suite, $target) = @ARGV;
 
 die "unknown suite: $suite" if $suite ne "archlinux";
+
+if ($opt_mkdir) {
+    if (! -d $target) {
+        mkdir $target
+    }
+}
 
 if ($< != 0) {
     print "must run as root\n";
@@ -64,6 +71,10 @@ noahstrap bootstraps a linux system of SUITE for noah into TARGET directory from
 =head2 --list
 
 Synchronizes the suite database and lists all available suites.
+
+=head2 -p
+
+Creates TARGET directory if it does not exists.
 
 =head2 --help
 

@@ -17,6 +17,10 @@ noahstrap bootstraps a linux system of SUITE for noah into TARGET directory from
 
 Synchronizes the suite database and lists all available suites.
 
+=head2 -p
+
+Creates TARGET directory if it does not exists.
+
 =head2 --help
 
 Shows this message.
