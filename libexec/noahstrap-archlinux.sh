@@ -16,16 +16,9 @@ chmod u+w $TARGET/proc
 mkdir $TARGET/proc/self/
 echo "none / hfsplus" > $TARGET/proc/self/mounts
 
-rm $TARGET/etc/mtab
-ln -s ../proc/self/mounts $TARGET/etc/mtab
-
-rm $TARGET/etc/resolv.conf
-ln -s /etc/resolv.conf $TARGET/etc/resolv.conf
-
-rm -rf $TARGET/tmp
-ln -s /tmp $TARGET/tmp
-
-rm $TARGET/etc/hostname
+ln -fs ../proc/self/mounts $TARGET/etc/mtab
+ln -fs /etc/resolv.conf $TARGET/etc/resolv.conf
+ln -Fs /tmp $TARGET/tmp
 
 echo archlinux is successfully installed into $TARGET
 
