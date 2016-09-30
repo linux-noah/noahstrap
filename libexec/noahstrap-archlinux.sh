@@ -1,10 +1,10 @@
 #! /bin/bash
 
 TARGET=$1
-
+URL=$2
 ARCHIVE=$(mktemp)
 
-curl -o $ARCHIVE http://idylls.jp/noah-blob/arch.tar.lzma
+curl -o $ARCHIVE $URL
 tar xvf $ARCHIVE -C $TARGET --strip-components=1
 
 #

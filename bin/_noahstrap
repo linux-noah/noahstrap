@@ -6,6 +6,7 @@ use Getopt::Long;
 use Pod::Usage;
 use File::Path;
 use FindBin;
+use LWP::Simple;
 
 our $VERSION = "0.0.4";
 
@@ -25,8 +26,19 @@ GetOptions(
     }
 ) or exit 1;
 
+my $suites_txt = `curl -s "https://raw.githubusercontent.com/linux-noah/noahstrap-suites/master/SUITES"`
+    or die "could not fetch suite database";
+
+my %suites;
+foreach my $line (split(/\n/, $suites_txt)) {
+    my ($name, $url) = split(/\t/, $line);
+    $suites{$name} = $url;
+}
+
 if ($opt_list) {
-    print "archlinux\n";
+    foreach my $suite (keys %suites) {
+        print $suite, "\n";
+    }
     exit 0;
 }
 
@@ -36,7 +48,7 @@ if ($#ARGV + 1 != 2) {
 
 my ($suite, $target) = @ARGV;
 
-die "unknown suite: $suite" if $suite ne "archlinux";
+die "unknown suite: $suite" unless $suites{$suite};
 
 if ($opt_mkdir) {
     if (! -d $target) {
@@ -49,7 +61,7 @@ if ($< != 0) {
     exit 1;
 }
 
-system "${prefix}/libexec/noahstrap-archlinux.sh $target";
+system "${prefix}/libexec/noahstrap-archlinux.sh $target $suites{$suite}";
 
 __END__
 
