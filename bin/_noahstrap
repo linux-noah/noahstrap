@@ -8,7 +8,7 @@ use File::Path;
 use FindBin;
 use LWP::Simple;
 
-our $VERSION = "0.1.3";
+our $VERSION = "0.1.4";
 
 my $prefix = "NOAHSTRAP_INSTALL_PREFIX";
 
