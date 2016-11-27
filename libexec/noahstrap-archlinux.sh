@@ -5,7 +5,7 @@ URL=$2
 ARCHIVE=$(mktemp)
 
 curl -o $ARCHIVE $URL
-tar xvf $ARCHIVE -C $TARGET --strip-components=1
+pv $ARCHIVE | tar xf -C $TARGET --strip-components=1 -
 
 #
 # Modify Arch Linux Userspace to do away with VFS
