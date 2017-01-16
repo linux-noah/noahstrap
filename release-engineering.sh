@@ -4,7 +4,7 @@ VERSION=$1
 
 # commit & push
 
-FILE=`pwd`/`git rev-parse --show-cdup`/bin/_noahstrap
+FILE=`pwd`/`git rev-parse --show-cdup`/noahstrap
 sed -i "" "s/our \$VERSION.*/our \$VERSION = \"$VERSION\";/" $FILE
 
 git add $FILE

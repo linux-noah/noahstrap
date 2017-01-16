@@ -7,10 +7,9 @@ use Pod::Usage;
 use File::Path;
 use FindBin;
 use LWP::Simple;
+use File::Temp qw/tempfile/;
 
 our $VERSION = "0.1.4";
-
-my $prefix = "NOAHSTRAP_INSTALL_PREFIX";
 
 my ($opt_list, $opt_mkdir);
 
@@ -52,7 +51,7 @@ die "unknown suite: $suite" unless $suites{$suite};
 
 if ($opt_mkdir) {
     if (! -d $target) {
-        mkdir $target
+        `mkdir -p $target`;
     }
 }
 
@@ -61,7 +60,11 @@ if ($< != 0) {
     exit 1;
 }
 
-system "${prefix}/libexec/noahstrap-archlinux.sh $target $suites{$suite}";
+my ($fh, $archive) = tempfile();
+system "curl -o $archive $suites{$suite}" and die "could not fetch the suite";
+system "pv $archive | gtar xzf - -C $target --strip-components=1" and die "could not extract fs tree from suite";
+
+print "$suite is successfully installed into $target\n";
 
 __END__
 
