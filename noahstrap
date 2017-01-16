@@ -9,7 +9,7 @@ use FindBin;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 
-our $VERSION = "0.1.4";
+our $VERSION = "2.0.0";
 
 my ($opt_list, $opt_mkdir);
 
